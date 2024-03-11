@@ -65,30 +65,38 @@ import os
 from ctypes import CDLL, c_int
 os: Provides a way to interact with the operating system, used here to get the current directory.
 CDLL: A class from the ctypes module that loads dynamic link libraries (DLLs) or shared libraries.
+
 Get the Absolute Path to the Current Directory:
 current_dir = os.path.dirname(os.path.abspath(__file__))
 os.path.abspath(__file__): Gets the absolute path of the current script.
 os.path.dirname(...): Extracts the directory part of the path, giving the absolute path to the current directory.
+
 Load the Shared Library (calculator.dylib):
 library_path = os.path.join(current_dir, 'calculator.dylib')
 calculator_lib = CDLL(library_path)
 os.path.join(...): Combines the current directory path with the filename (calculator.dylib) to get the full path to the shared library.
 CDLL(...): Loads the shared library into the script. calculator_lib is an instance of the CDLL class representing the loaded library.
+
 Define the Function Signature:
 calculator_lib.calculate.argtypes = [c_int, c_int, c_int, c_int]
 calculator_lib.calculate.restype = c_int
 argtypes: Specifies the argument types for the calculate function in the shared library (four integers in this case).
 restype: Specifies the return type of the calculate function (integer).
+
 Define the Python Function (calculate):
 def calculate(num_one, num_two, num_three, choice):
     return calculator_lib.calculate(num_one, num_two, num_three, choice)
+
 calculate A Python function that calls the calculate function from the loaded shared library, passing the provided arguments.
+
 calculator_wrapper.py provides a convenient interface for Python code to interact with the C++ functionality implemented in the shared library. It loads the library, defines the function signature, and exposes a Python function (calculate) that internally calls the C++ function.
 
 **Explanation for calculator.dylib**
 
 `calculator.dylib` is a shared library file on macOS. The ".dylib" extension indicates that it is a dynamic library, which is a compiled binary file containing code and data that multiple programs can use simultaneously. In this context, it likely contains the compiled C++ code for the calculator functionality.
+
 Shared libraries offer a way to share code among different programs, reducing redundancy and allowing for more efficient memory usage. The dynamic nature of these libraries means that they are loaded into memory only when needed, rather than being statically linked at compile time.
+
 In your case, `calculator.dylib` appears to be the compiled version of the C++ code responsible for performing calculations, and it is loaded and used by the Python script through the `ctypes` module. This enables Python to access and utilize the C++ functionality defined in the shared library.
 
 **Explanation for setup.py**
