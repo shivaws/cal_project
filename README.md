@@ -59,31 +59,35 @@ Overall, the `__init__.py` file serves to define the behavior of a Python packag
 
 The Python script calculator_wrapper.py serves as a bridge between the Python code and the C++ shared library (calculator.dylib). Here's an explanation of each part of the script:
 
-Import Statements:
+**Import Statements**
 
 import os
 from ctypes import CDLL, c_int
 os: Provides a way to interact with the operating system, used here to get the current directory.
 CDLL: A class from the ctypes module that loads dynamic link libraries (DLLs) or shared libraries.
 
-Get the Absolute Path to the Current Directory:
+**Get the Absolute Path to the Current Directory**
+
 current_dir = os.path.dirname(os.path.abspath(__file__))
 os.path.abspath(__file__): Gets the absolute path of the current script.
 os.path.dirname(...): Extracts the directory part of the path, giving the absolute path to the current directory.
 
-Load the Shared Library (calculator.dylib):
+**Load the Shared Library (calculator.dylib)**
+
 library_path = os.path.join(current_dir, 'calculator.dylib')
 calculator_lib = CDLL(library_path)
 os.path.join(...): Combines the current directory path with the filename (calculator.dylib) to get the full path to the shared library.
 CDLL(...): Loads the shared library into the script. calculator_lib is an instance of the CDLL class representing the loaded library.
 
-Define the Function Signature:
+**Define the Function Signature**
+
 calculator_lib.calculate.argtypes = [c_int, c_int, c_int, c_int]
 calculator_lib.calculate.restype = c_int
 argtypes: Specifies the argument types for the calculate function in the shared library (four integers in this case).
 restype: Specifies the return type of the calculate function (integer).
 
-Define the Python Function (calculate):
+**Define the Python Function (calculate)**
+
 def calculate(num_one, num_two, num_three, choice):
     return calculator_lib.calculate(num_one, num_two, num_three, choice)
 
