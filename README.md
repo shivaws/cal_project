@@ -1,4 +1,4 @@
-Step 1: "Execute the calculator.cpp" run using this command on your terminal *g++ -shared -o calculator.dylib -fPIC calculator.cpp
+Step 1: "Execute the calculator.cpp" run using this command on your terminal *  g++ -shared -o calculator.dylib -fPIC calculator.cpp
 
 Step 2: "After execution calculator.cpp we will get a file calculator.dylib (which is a shared library file generated after compiling your C++ code.) "
 
