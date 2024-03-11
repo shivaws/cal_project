@@ -1,6 +1,9 @@
-Step 1: "Execute the calculator.cpp" run using this command on your terminal "g++ -shared -o calculator.dylib -fPIC calculator.cpp"
+Step 1: "Execute the calculator.cpp" run using this command on your terminal *g++ -shared -o calculator.dylib -fPIC calculator.cpp
+
 Step 2: "After execution calculator.cpp we will get a file calculator.dylib (which is a shared library file generated after compiling your C++ code.) "
+
 Step 3: "Use pip install ." to install the python lib
+
 Step 4: "Use main.py" to execute the program in your terminal
 
 **Explanation for calculator.cpp**
